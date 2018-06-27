@@ -15,9 +15,12 @@ public function index(){
   return view ("productsAdmin",["products"=>$products]);
 }
   public function save(Request $request)
-  { //dd($request->all());
+  { 
     $rq= $request->all();
-    $inputs = ($request == null) ? $request['imagen'] : $request['imagen']->getClientOriginalName();
+    if (is_string($rq['valor'])== true ) {
+      $rq['valor'] = 0;
+    }
+    $inputs = ($request['imagen'] == null) ? "" : $request['imagen']->getClientOriginalName();
     $rq['imagen']=$inputs;
     ProductoModelo::create($rq);
     $upLoad = UploadController::upload($request);
