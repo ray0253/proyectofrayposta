@@ -20,6 +20,7 @@ public function index(){
     if (is_string($rq['valor'])== true ) {
       $rq['valor'] = 0;
     }
+    $rq['name'] = ($request['name'] == null) ? $request['name'] = "no tiene nombre el producto" : $request['name']->getClientOriginalName();
     $inputs = ($request['imagen'] == null) ? "" : $request['imagen']->getClientOriginalName();
     $rq['imagen']=$inputs;
     ProductoModelo::create($rq);
